@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | BlogSphere</title>
+
+    <!-- Google Font -->
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="css/style.css">
+
+</head>
+
+<body>
+
+    <!--================ SIDEBAR ================-->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+
+            <h2>BlogSphere</h2>
+
+        </div>
+
+        <ul>
+
+            <li>
+
+                <a href="dashboard.html"
+                    class="active">
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="create-blog.html">
+
+                    Create Blog
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="index.html">
+
+                    Home
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="#"
+                    onclick="logout()">
+
+                    Logout
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!--================ MAIN CONTENT ================-->
+
+    <main class="dashboard-content">
+
+        <!-- Header -->
+
+        <header class="dashboard-header">
+
+            <div>
+
+                <h1>
+
+                    Welcome,
+                    <span id="username">
+
+                        User
+
+                    </span>
+                    👋
+
+                </h1>
+
+                <p>
+
+                    Manage all your blogs from here.
+
+                </p>
+
+            </div>
+
+            <a href="create-blog.html"
+                class="btn">
+
+                + New Blog
+
+            </a>
+
+        </header>
+
+        <!-- Statistics -->
+
+        <section class="stats">
+
+            <div class="stat-card">
+
+                <h2 id="totalBlogs">
+
+                    0
+
+                </h2>
+
+                <p>
+
+                    Total Blogs
+
+                </p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h2 id="publishedBlogs">
+
+                    0
+
+                </h2>
+
+                <p>
+
+                    Published
+
+                </p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h2 id="draftBlogs">
+
+                    0
+
+                </h2>
+
+                <p>
+
+                    Drafts
+
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- Blog Table -->
+
+        <section class="blog-table">
+
+            <div class="table-header">
+
+                <h2>
+
+                    My Blogs
+
+                </h2>
+
+            </div>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Title</th>
+
+                        <th>Category</th>
+
+                        <th>Date</th>
+
+                        <th>Status</th>
+
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="blogTable">
+
+                    <!-- JavaScript will load blogs -->
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+    <script src="js/auth.js"></script>
+
+    <script src="js/blog.js"></script>
+
+    <script>
+
+        checkLogin();
+
+        const user = JSON.parse(localStorage.getItem("loggedInUser"));
+
+        if(user){
+
+            document.getElementById("username").innerText = user.username;
+
+        }
+
+    </script>
+
+    <script src="js/auth.js"></script>
+
+<script src="js/dashboard.js"></script>
+
+
+<script>
+
+checkLogin();
+
+</script>
+
+</body>
+
+</html>
