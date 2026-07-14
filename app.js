@@ -1,101 +1,72 @@
-const BLOG_API =
-"http://localhost:5000/api/blogs";
+import express from "express";
+
+import cors from "cors";
+
+import cookieParser from "cookie-parser";
 
 
-const blogContainer =
-document.getElementById(
-"blogContainer"
+import authRoutes from "./routes/auth.routes.js";
+
+import blogRoutes from "./routes/blog.routes.js";
+
+
+import {
+errorHandler
+}
+from "./middleware/error.middleware.js";
+
+
+
+const app =
+express();
+
+
+
+app.use(
+
+cors({
+
+origin:
+process.env.CORS_ORIGIN,
+
+credentials:true
+
+})
+
 );
 
 
 
-async function loadBlogs(){
-
-
-const response =
-await fetch(BLOG_API);
-
-
-
-const result =
-await response.json();
+app.use(
+express.json()
+);
 
 
 
-const blogs =
-result.data;
+app.use(
+cookieParser()
+);
 
 
 
-blogContainer.innerHTML="";
+app.use(
+"/api/auth",
+authRoutes
+);
 
 
 
-blogs.forEach(blog=>{
-
-
-blogContainer.innerHTML +=
-
-`
-
-<div class="blog-card">
-
-
-<img src="${blog.image}">
-
-
-<div class="blog-content">
-
-
-<span class="category">
-
-${blog.category}
-
-</span>
+app.use(
+"/api/blogs",
+blogRoutes
+);
 
 
 
-<h3>
-
-${blog.title}
-
-</h3>
+app.use(
+errorHandler
+);
 
 
 
-<p>
-
-${blog.description}
-
-</p>
-
-
-
-<a href="blog-details.html?id=${blog._id}">
-
-Read More →
-
-</a>
-
-
-</div>
-
-
-</div>
-
-`;
-
-
-
-});
-
-
-}
-
-
-
-if(blogContainer){
-
-loadBlogs();
-
-}
+export default app;
